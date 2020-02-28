@@ -3,7 +3,6 @@ services:
   app:
     build: .
     environment:
-      DATABASE_URL: mysql2://root:password123@mysql:3306
       MYSQL_ROOT_PASSWORD: password123
       MYSQL_USER: root
       MYSQL_DATABASE: test1
@@ -11,7 +10,7 @@ services:
       node_app_net:
         ipv4_address: 172.25.0.8
     volumes:
-      - .:/usr/src/app:rw
+      - .:/usr/src/app
     links:
       - db:mysql
     depends_on:
@@ -19,6 +18,7 @@ services:
   db:
     image: mariadb:10.4
     environment:
+      MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: password123
       MYSQL_DATABASE: test1
     networks:
