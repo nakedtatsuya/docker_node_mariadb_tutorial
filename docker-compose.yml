@@ -1,0 +1,41 @@
+version: '3.7'
+services:
+  app:
+    build: .
+    environment:
+      DATABASE_URL: mysql2://root:password123@mysql:3306
+      MYSQL_ROOT_PASSWORD: password123
+      MYSQL_USER: root
+      MYSQL_DATABASE: test1
+    networks:
+      node_app_net:
+        ipv4_address: 172.25.0.8
+    volumes:
+      - .:/usr/src/app:rw
+    links:
+      - db:mysql
+    depends_on:
+      - db
+  db:
+    image: mariadb:10.4
+    environment:
+      MYSQL_ROOT_PASSWORD: password123
+      MYSQL_DATABASE: test1
+    networks:
+      node_app_net:
+        ipv4_address: 172.25.0.2
+    volumes:
+      - mysql-vol:/var/lib/mysql
+volumes:
+  mysql-vol:
+    driver_opts:
+      type: none
+      device: /data/mysql
+      o: bind
+networks:
+  node_app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.25.0.0/24
