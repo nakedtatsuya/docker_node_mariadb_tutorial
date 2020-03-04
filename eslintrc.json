@@ -1,0 +1,6 @@
+{
+  "extends": [
+    "node-app",
+    "plugin:prettier/recommended"
+  ]
+}

@@ -4,7 +4,13 @@
   "main": "dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": "eslint './src/**/*.{ts,tsx}'",
+    "eslint:fix": "eslint --fix './src/**/*.{ts,tsx}'",
+    "prettier": "prettier --write ./{src,__tests__}/**/*.{ts,tsx}",
     "start": "nodemon dist/app.js & tsc --watch"
+  },
+  "eslintConfig": {
+    "extends": "node-app"
   },
   "author": "tatsuya",
   "license": "ISC",
@@ -14,13 +20,19 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "mysql": "^2.18.1",
     "mysql2": "^2.1.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.3",
+    "@types/mysql": "^2.15.9",
     "@types/node": "^13.7.7",
     "nodemon": "^2.0.2",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "eslint-config-prettier": "^5.0.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.18.2"
   }
 }
