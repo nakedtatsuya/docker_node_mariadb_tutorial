@@ -2,6 +2,6 @@ node.iml/
 .idea/
 .config/
 .npm/
-
+.env
 # dependencies
 /node_modules
