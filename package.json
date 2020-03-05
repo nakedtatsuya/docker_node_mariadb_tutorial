@@ -7,7 +7,7 @@
     "eslint": "eslint './src/**/*.{ts,tsx}'",
     "eslint:fix": "eslint --fix './src/**/*.{ts,tsx}'",
     "prettier": "prettier --write ./{src,__tests__}/**/*.{ts,tsx}",
-    "start": "nodemon dist/app.js & tsc --watch"
+    "start": "chmod -R 777 dist & nodemon dist/app.js & tsc --watch"
   },
   "eslintConfig": {
     "extends": "node-app"
@@ -19,20 +19,31 @@
     "url": "git@github.com:tatsuyafukui/docker_node_mariadb_tutorial.git"
   },
   "dependencies": {
+    "@types/basic-auth": "^1.1.3",
+    "basic-auth": "^2.0.1",
+    "ejs": "^3.0.1",
     "express": "^4.17.1",
-    "mysql": "^2.18.1",
     "mysql2": "^2.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-typescript": "^7.8.3",
+    "@types/cookie-parser": "^1.4.2",
     "@types/express": "^4.17.3",
-    "@types/mysql": "^2.15.9",
+    "@types/http-errors": "^1.6.3",
+    "@types/jest": "^25.1.3",
+    "@types/morgan": "^1.9.0",
+    "@types/mysql2": "github:types/mysql2",
     "@types/node": "^13.7.7",
-    "nodemon": "^2.0.2",
-    "ts-loader": "^6.2.1",
-    "typescript": "^3.8.3",
+    "babel-jest": "^25.1.0",
     "eslint-config-prettier": "^5.0.0",
     "eslint-config-react": "^1.1.7",
     "eslint-plugin-prettier": "^3.1.0",
-    "prettier": "^1.18.2"
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.18.2",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.8.3"
   }
 }

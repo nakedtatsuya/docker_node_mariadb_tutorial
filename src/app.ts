@@ -1,30 +1,34 @@
 import express from 'express';
+import path from 'path';
+
+import indexRouter, {BLOGS, ADMIN, INDEX} from './routes';
+import blogsRouter from './routes/blogs';
+import adminRouter from './routes/admin';
+import connection from './db/mariadb';
+
 const app = express();
-import mysql from 'mysql';
 
-const connection = mysql.createConnection({
-  host: '172.25.0.2',
-  user: process.env.MYSQL_USER,
-  database: process.env.MYSQL_DATABASE,
-  password: process.env.MYSQL_ROOT_PASSWORD,
-});
+app.set('view engine', 'ejs');
+app.set('views', process.cwd() + '/src/views');
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(process.cwd() + '/src/public'));
 const PORT = process.env.PORT || 8080;
 
 app.get('/', (req, res) => {
-  connection.query('SELECT * FROM users', function(err, results, fields) {
-    console.log(results); // results contains rows returned by server'
-    let testdb = 'not db';
-    if (results && results.length > 0) {
-      testdb = results[0].name;
-    }
-    res.send(`
-							<h1>Docker + Node</h1>
-							<span>Ass match made in the cloud name is ${testdb}</span>
-					`);
+  connection.query('SELECT * FROM users', (err, results, fields) => {
+    console.log(results);
+    res.render('index', {path: __dirname});
   });
 });
 
+app.get(INDEX, indexRouter);
+app.use(BLOGS, blogsRouter);
+app.use(ADMIN, adminRouter);
+
+
+
 app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}...`);
+  console.log(`sServer listensing sons port ${PORT}...`);
 });

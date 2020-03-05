@@ -8,18 +8,18 @@ nodeとmariadbの開発環境を整えるdocker tutorialです
 
 ## build
 
+DBのデータをホストOSへマウントするためのフォルダ
+
+`mkdir -p /data/mysql`
+
 ビルド
 
 `sudo docker-compose up --build -d`
-
 
 コンテナ確認。nodeとmariadbが立ち上がっているか？
 `docker-container ls`
 
 ## DB設定
-DBのデータをホストOSへマウントするためのフォルダ
-
-`mkdir -p /data/mysql`
 
 アプリケーション側でDB使うので初期設定する
 DB：test1
@@ -35,14 +35,9 @@ mariadbにsign in
 
 ```
 CREATE DATABASE IF NOT EXISTS test1;
-```
 
-```
 CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY, name char(255) not null);
-```
 
-
-```
 INSERT INTO `users`
 SELECT * FROM (SELECT 1, 'first data') AS tmp
 WHERE NOT EXISTS (
